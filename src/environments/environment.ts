@@ -2,8 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { PageRoutes } from "src/app/shared/models/page-routes.enum";
+
 export const environment = {
-  production: false
+  production: false,
+  requestRoot: PageRoutes.LocalHost,
 };
 
 /*
