@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, throwError } from "rxjs";
+import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { ResponseModel } from "../models/response.model";
 import { CookieService } from 'ngx-cookie-service';
@@ -18,6 +19,26 @@ export class LoginService {
         return this.http.post<any>(ROOT_PATH + '/login', loginModel)
     }
 
+    doLogout(){
+        this.removeToken();
+    }
+
+    getAccessTokenWithRefreshToken(){
+        const refreshToken = this.getRefreshToken();
+        return this.http.post<any>(ROOT_PATH + '/token/refresh', refreshToken).pipe(
+            tap((res: any) => {
+                this.storeJwtToken(res.accessToken);
+            })
+        )
+    }
+
+    private storeJwtToken(accessToken: string){
+        localStorage.setItem('access_token',accessToken)
+    }
+
+   isTokenExpired(token: string){
+    return this.jwtHelperService.isTokenExpired(token);
+   }
 
     isLoggedIn(){
         return !!this.getAccessToken();

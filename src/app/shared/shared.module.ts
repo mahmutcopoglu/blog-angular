@@ -21,11 +21,25 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { CookieService } from "ngx-cookie-service";
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { MenuComponent } from './menu/menu.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ContentComponent } from './content/content.component';
+import { TagsComponent } from './tags/tags.component';
+import { LastBlogsComponent } from './last-blogs/last-blogs.component';
+import { LastAnswersComponent } from './last-answers/last-answers.component';
+import { ContentService } from "./services/content.service";
+
 
 @NgModule({
     declarations: [
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        MenuComponent,
+        SidebarComponent,
+        ContentComponent,
+        TagsComponent,
+        LastBlogsComponent,
+        LastAnswersComponent
     ],
     imports: [
         CommonModule,
@@ -46,15 +60,23 @@ import {MessageModule} from 'primeng/message';
         MessagesModule
     ],
     exports: [
+        MenuComponent,
+        ContentComponent,
+        SidebarComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        TagsComponent,
+        LastBlogsComponent,
+        LastAnswersComponent
+        
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
-        NO_ERRORS_SCHEMA
+        NO_ERRORS_SCHEMA,
+        
     ],
     providers: [
-        RegisterService, MessageService, LoginService, JwtHelperService, CookieService
+        RegisterService, MessageService, LoginService, JwtHelperService, CookieService, ContentService
     ]
 })
-export class SharedModule {}
+export class SharedModules {}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -90,6 +90,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SharedModules } from './shared/shared.module';
+import { AppMainComponent } from './app-main.component';
+import { AuthInterceptor } from './shared/security/interceptors/auth.interceptor';
 
 
 
@@ -184,6 +187,7 @@ import { JwtModule } from '@auth0/angular-jwt';
         StyleClassModule,
         SharedModule,
         RouterModule,
+        SharedModules,
         JwtModule.forRoot({
             config: {
                 tokenGetter: () => {
@@ -195,10 +199,11 @@ import { JwtModule } from '@auth0/angular-jwt';
         })
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        AppMainComponent
     ],
     providers: [
-    
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true},
     ],
     bootstrap: [AppComponent]
 })

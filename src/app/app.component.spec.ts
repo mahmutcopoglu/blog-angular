@@ -4,14 +4,15 @@ import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
-import {AppMenuComponent} from './app.menu.component';
+import { AppMainComponent } from './app-main.component';
+
 
 describe('AppComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [NoopAnimationsModule, RouterTestingModule],
-            declarations: [AppComponent,
-                AppMenuComponent
+            declarations: [AppComponent,AppMainComponent
+                
             ]
         });
         TestBed.compileComponents();
